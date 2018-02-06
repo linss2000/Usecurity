@@ -58,7 +58,7 @@ async function GetRoles(parm)
     let newResults = [];
     if (resultObj.errCode == "-100")
     {
-      var output = JSON.stringify({"message": "fail", "hasAccess":"N", "roles": "sps_getUserRoles"+resultObj.errDesc});
+      var output = JSON.stringify({"message": "fail", "hasAccess":"Y", "result": "sps_getUserRoles"+resultObj.errDesc});
       return output;
     }
 
@@ -66,7 +66,7 @@ async function GetRoles(parm)
    console.log('Roles:' + resultObj.data[0][0]["JSON"]);
    if (resultObj.data[0][0]["hasRoleschanged"] == 'Y')
    {
-       var output = JSON.stringify({"message": "ok", "hasAccess":resultObj.data[0][0]["hasAccess"], "roles": JSON.parse(resultObj.data[0][0]["JSON"])});
+       var output = JSON.stringify({"message": "ok", "hasAccess":resultObj.data[0][0]["hasAccess"], "result": "", "roles": JSON.parse(resultObj.data[0][0]["JSON"])});
    }
    else {
 

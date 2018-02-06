@@ -44,15 +44,15 @@ router.get('/', function (req, res, next) {
     console.log('Hello there');
     res.render('index', { title: 'Express' });
 });
-router.get('/getRoles', function (req, res, next) {
+router.post('/checkRoles', function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
         var parmstr, parms, parm, keyArr, result, err_1, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log('in getRoles');
+                    console.log('in checkRoles');
                     debugger;
-                    parmstr = JSON.stringify(req.query);
+                    parmstr = JSON.stringify(req.body);
                     parms = JSON.parse(parmstr);
                     parm = [];
                     try {
@@ -82,44 +82,6 @@ router.get('/getRoles', function (req, res, next) {
         });
     });
 });
-router.post('/checkRoles', function (req, res, next) {
-    return __awaiter(this, void 0, void 0, function () {
-        var parmstr, parms, parm, keyArr, result, err_2, result;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    console.log('in checkRoles');
-                    debugger;
-                    parmstr = JSON.stringify(req.body);
-                    parms = JSON.parse(parmstr);
-                    parm = [];
-                    try {
-                        keyArr = Object.keys(parms);
-                        keyArr.forEach(function (key, index) {
-                            parm[index] = parms[key];
-                        });
-                    }
-                    catch (err) {
-                    }
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, GetRoles(parm)];
-                case 2:
-                    result = _a.sent();
-                    console.log("roles result:" + result);
-                    res.status(200).json(result);
-                    return [3 /*break*/, 4];
-                case 3:
-                    err_2 = _a.sent();
-                    result = JSON.stringify({ "message": "fail", "hasAccess": "N", "result": err_2.message });
-                    res.status(400).json(result);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
-            }
-        });
-    });
-});
 function GetRoles(parm) {
     return __awaiter(this, void 0, void 0, function () {
         var result, resultObj, newResults, output, output, output, e_1, output;
@@ -134,13 +96,13 @@ function GetRoles(parm) {
                     resultObj = JSON.parse(result);
                     newResults = [];
                     if (resultObj.errCode == "-100") {
-                        output = JSON.stringify({ "message": "fail", "hasAccess": "N", "roles": "sps_getUserRoles" + resultObj.errDesc });
+                        output = JSON.stringify({ "message": "fail", "hasAccess": "Y", "result": "sps_getUserRoles" + resultObj.errDesc });
                         return [2 /*return*/, output];
                     }
                     console.log('Roles changed' + resultObj.data[0][0]["hasRoleschanged"]);
                     console.log('Roles:' + resultObj.data[0][0]["JSON"]);
                     if (resultObj.data[0][0]["hasRoleschanged"] == 'Y') {
-                        output = JSON.stringify({ "message": "ok", "hasAccess": resultObj.data[0][0]["hasAccess"], "roles": JSON.parse(resultObj.data[0][0]["JSON"]) });
+                        output = JSON.stringify({ "message": "ok", "hasAccess": resultObj.data[0][0]["hasAccess"], "result": "", "roles": JSON.parse(resultObj.data[0][0]["JSON"]) });
                     }
                     else {
                         output = JSON.stringify({ "message": "ok", "hasAccess": resultObj.data[0][0]["hasAccess"], "result": "" });
