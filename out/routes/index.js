@@ -102,10 +102,10 @@ function GetRoles(parm) {
                     console.log('Roles changed' + resultObj.data[0][0]["hasRoleschanged"]);
                     console.log('Roles:' + resultObj.data[0][0]["JSON"]);
                     if (resultObj.data[0][0]["hasRoleschanged"] == 'Y') {
-                        output = JSON.stringify({ "message": "ok", "hasAccess": resultObj.data[0][0]["hasAccess"], "result": "", "roles": JSON.parse(resultObj.data[0][0]["JSON"]) });
+                        output = JSON.stringify({ "message": "ok", "lstUpdTs": resultObj.data[0][0]["lastUpdTs"], "hasAccess": resultObj.data[0][0]["hasAccess"], "result": "", "roles": JSON.parse(resultObj.data[0][0]["JSON"]) });
                     }
                     else {
-                        output = JSON.stringify({ "message": "ok", "hasAccess": resultObj.data[0][0]["hasAccess"], "result": "" });
+                        output = JSON.stringify({ "message": "ok", "lstUpdTs": resultObj.data[0][0]["lastUpdTs"], "hasAccess": resultObj.data[0][0]["hasAccess"], "result": "" });
                     }
                     return [2 /*return*/, output];
                 case 2:

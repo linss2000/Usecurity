@@ -66,11 +66,14 @@ async function GetRoles(parm)
    console.log('Roles:' + resultObj.data[0][0]["JSON"]);
    if (resultObj.data[0][0]["hasRoleschanged"] == 'Y')
    {
-       var output = JSON.stringify({"message": "ok", "hasAccess":resultObj.data[0][0]["hasAccess"], "result": "", "roles": JSON.parse(resultObj.data[0][0]["JSON"])});
+       var output = JSON.stringify({"message": "ok","lstUpdTs":resultObj.data[0][0]["lastUpdTs"], "hasAccess":resultObj.data[0][0]["hasAccess"], "result": "", "roles": JSON.parse(resultObj.data[0][0]["JSON"])});
    }
    else {
-
-      var output = JSON.stringify({"message": "ok", "hasAccess":resultObj.data[0][0]["hasAccess"], "result": ""});
+    if (resultObj.data[0][0]["hasAccess"] == 'N') {
+      var output = JSON.stringify({"message": "ok", "lstUpdTs":resultObj.data[0][0]["lastUpdTs"],"hasAccess":resultObj.data[0][0]["hasAccess"], "result": "Has No access to function"});
+    } else {
+      var output = JSON.stringify({"message": "ok", "lstUpdTs":resultObj.data[0][0]["lastUpdTs"],"hasAccess":resultObj.data[0][0]["hasAccess"], "result": ""});
+    }
    }
 
     return output;
