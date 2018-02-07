@@ -84,7 +84,7 @@ router.post('/checkRoles', function (req, res, next) {
 });
 function GetRoles(parm) {
     return __awaiter(this, void 0, void 0, function () {
-        var result, resultObj, newResults, output, output, output, e_1, output;
+        var result, resultObj, newResults, output, output, output, output, e_1, output;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -105,7 +105,12 @@ function GetRoles(parm) {
                         output = JSON.stringify({ "message": "ok", "lstUpdTs": resultObj.data[0][0]["lastUpdTs"], "hasAccess": resultObj.data[0][0]["hasAccess"], "result": "", "roles": JSON.parse(resultObj.data[0][0]["JSON"]) });
                     }
                     else {
-                        output = JSON.stringify({ "message": "ok", "lstUpdTs": resultObj.data[0][0]["lastUpdTs"], "hasAccess": resultObj.data[0][0]["hasAccess"], "result": "" });
+                        if (resultObj.data[0][0]["hasAccess"] == 'N') {
+                            output = JSON.stringify({ "message": "ok", "lstUpdTs": resultObj.data[0][0]["lastUpdTs"], "hasAccess": resultObj.data[0][0]["hasAccess"], "result": "Has No access to function" });
+                        }
+                        else {
+                            output = JSON.stringify({ "message": "ok", "lstUpdTs": resultObj.data[0][0]["lastUpdTs"], "hasAccess": resultObj.data[0][0]["hasAccess"], "result": "" });
+                        }
                     }
                     return [2 /*return*/, output];
                 case 2:
