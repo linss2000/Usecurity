@@ -17,7 +17,7 @@ var configlocal = require('./config');
 //==========================
 debugger;
 console.log(configlocal.secret);
-var port = process.env.PORT || 3031;
+var port = process.env.PORT || 4031;
 //connect to sql
 app.set('superSecret', configlocal.secret);
 //use body parser so we can get info from POST and/or URL parameters
